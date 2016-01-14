@@ -1,0 +1,51 @@
+﻿<!--
+
+CodeCofe.com
+
+contact@codecofe.com
++591 72483556
+
+-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Ejemplo Cliente Api</title>
+
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+
+    <script type="text/javascript">
+
+        // Dirección de operación para obtener programadores.
+        var uri = 'http://localhost:5028/api/Programador/Programadores';
+
+        $(document).ready(function () {
+
+            // Obtiene respuesta por ajax.
+            $.getJSON(uri)
+                .done(function (respuesta) {
+
+                    // Recorre cada item de la respuesta que contiene los datos de programadores.
+                    $.each(respuesta, function (key, item) {
+                        // Add a list item for the product.
+                        $('<li>', { text: FormatearDatos(item) }).appendTo($('#programadores'));
+                    });
+                });
+        });
+
+        function FormatearDatos(item) {
+            return "ID:" + item.ID + ";   Nombre Completo:" + item.Nombre + " " + item.Apellido +
+                    ";   Especialidad:" + item.Especialidad + ";   Calificación:" + item.Calificacion;
+        }
+
+    </script>
+
+</head>
+<body>
+    <div>
+        <h2>Programadores</h2>
+        <ul id="programadores" />
+    </div>
+</body>
+</html>
